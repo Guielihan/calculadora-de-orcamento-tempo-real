@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Calculadora de Custos - Godevs</title>
+    
+    <!-- fontes -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    
+    <!-- estilos -->
+    <link rel="stylesheet" href="style.css"/>
+    
+    <!-- tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#53d22d",
+                        "operation": "#F0A33A",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#152012",
+                        "surface-dark": "#1C1C1E",
+                        "surface-light": "#2C2C2E",
+                        "function-btn": "#A6A6A6",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-white min-h-screen flex items-center justify-center p-4 selection:bg-primary selection:text-white">
+    <!-- container principal - iphone frame -->
+    <div class="relative mx-auto border-[#202532] dark:border-[#202532] bg-[#202532] border-[14px] rounded-[3.5rem] h-[844px] w-[390px] shadow-2xl flex flex-col overflow-hidden">
+        
+        <!-- tela interna -->
+        <div class="w-full h-full bg-[#131712] dark:bg-[#131712] rounded-[2.5rem] overflow-hidden flex flex-col relative z-0">
+            
+            <!-- barra de status (topo) -->
+            <div class="flex justify-between items-center px-8 pt-[14px] pb-2 text-white text-[15px] font-semibold z-20 shrink-0">
+                <span>02:40</span>
+                <div class="flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[18px]">signal_cellular_alt</span>
+                    <span class="material-symbols-outlined text-[18px]">wifi</span>
+                    <span class="material-symbols-outlined text-[18px] rotate-90">battery_full</span>
+                </div>
+            </div>
+            
+            <!-- notch (iphone) -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 h-[34px] w-[120px] bg-black rounded-b-3xl z-10"></div>
+            
+            <!-- conteúdo principal -->
+            <div class="flex-1 flex flex-col overflow-y-auto no-scrollbar pb-8 pt-2 px-4 relative">
+                
+                <!-- título -->
+                <h1 class="text-white/50 text-center text-sm font-medium uppercase tracking-widest pt-2 shrink-0">
+                    CALCULADORA - GODEVS
+                </h1>
+                
+                <!-- display de Valores -->
+                <div class="flex flex-col justify-end items-end py-1 space-y-1 shrink-0">
+                    <!-- display secundário (valor base + planos) -->
+                    <div id="secondary-display" class="text-white/40 text-lg font-normal tracking-wide flex items-center gap-2">
+                        <span id="base-value">0,00</span>
+                        <span id="plan-addition" class="text-primary"></span>
+                    </div>
+                    
+                    <!-- display principal (total) -->
+                    <div class="flex flex-col items-end w-full">
+                        <div id="main-display" class="text-white text-[52px] font-bold leading-none tracking-tight break-all text-right w-full drop-shadow-sm">
+                            R$ 0,00
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- seção de planos -->
+                <div class="flex flex-col gap-2 mb-2 shrink-0">
+                    
+                    <!-- plano básico -->
+                    <label class="group relative flex items-center justify-between p-2.5 rounded-2xl bg-surface-dark border border-white/5 transition-all active:scale-[0.98] cursor-pointer hover:bg-white/5">
+                        <div class="flex flex-col">
+                            <span class="text-white font-semibold text-base">Básico</span>
+                            <a href="https://in100tiva.com/curso/seo-code" target="_blank" rel="noopener noreferrer" class="text-white/50 text-xs hover:text-primary transition-colors" onclick="event.stopPropagation()">
+                                Clique para saber mais
+                            </a>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-primary font-bold">R$ 127,00</span>
+                            <div class="relative flex items-center">
+                                <input id="plan-basico" data-value="127" class="peer h-6 w-6 cursor-pointer appearance-none rounded-full border-2 border-white/20 transition-all checked:border-primary checked:bg-primary hover:border-primary focus:ring-0 focus:ring-offset-0" type="checkbox"/>
+                                <span class="material-symbols-outlined absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[16px] text-white opacity-0 peer-checked:opacity-100 pointer-events-none font-bold">check</span>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <!-- plano premium -->
+                    <label class="group relative flex items-center justify-between p-2.5 rounded-2xl bg-surface-dark border border-white/5 transition-all active:scale-[0.98] cursor-pointer hover:bg-white/5">
+                        <div class="flex flex-col">
+                            <span class="text-white font-semibold text-base">Premium</span>
+                            <a href="https://in100tiva.com/curso/seo-code" target="_blank" rel="noopener noreferrer" class="text-white/50 text-xs hover:text-primary transition-colors" onclick="event.stopPropagation()">
+                                Clique para saber mais
+                            </a>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-primary font-bold">R$ 157,00</span>
+                            <div class="relative flex items-center">
+                                <input id="plan-premium" data-value="157" class="peer h-6 w-6 cursor-pointer appearance-none rounded-full border-2 border-white/20 transition-all checked:border-primary checked:bg-primary hover:border-primary focus:ring-0 focus:ring-offset-0" type="checkbox"/>
+                                <span class="material-symbols-outlined absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[16px] text-white opacity-0 peer-checked:opacity-100 pointer-events-none font-bold">check</span>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <!-- plano completo -->
+                    <label class="group relative flex items-center justify-between p-2.5 rounded-2xl bg-surface-dark border border-white/5 transition-all active:scale-[0.98] cursor-pointer hover:bg-white/5">
+                        <div class="flex flex-col">
+                            <span class="text-white font-semibold text-base">Completo</span>
+                            <a href="https://in100tiva.com/curso/seo-code" target="_blank" rel="noopener noreferrer" class="text-white/50 text-xs hover:text-primary transition-colors" onclick="event.stopPropagation()">
+                                Clique para saber mais
+                            </a>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-primary font-bold">R$ 187,00</span>
+                            <div class="relative flex items-center">
+                                <input id="plan-completo" data-value="187" class="peer h-6 w-6 cursor-pointer appearance-none rounded-full border-2 border-white/20 transition-all checked:border-primary checked:bg-primary hover:border-primary focus:ring-0 focus:ring-offset-0" type="checkbox"/>
+                                <span class="material-symbols-outlined absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[16px] text-white opacity-0 peer-checked:opacity-100 pointer-events-none font-bold">check</span>
+                            </div>
+                        </div>
+                    </label>
+                    
+                </div>
+                
+                <!-- botão reset -->
+                <div class="flex justify-end mb-2">
+                    <button id="btn-reset" class="focus-ring px-4 py-2 rounded-full bg-primary text-[#1C1C1E] text-sm font-semibold hover:brightness-110 active:brightness-95 transition-colors">
+                        Reset total
+                    </button>
+                </div>
+                
+                <!-- teclado da calculadora -->
+                <div class="grid grid-cols-4 gap-3 shrink-0 pb-4">
+                    
+                    <!-- linha 1: funções -->
+                    <button id="btn-ac" class="aspect-square rounded-full bg-[#A6A6A6] text-[#1C1C1E] text-xl font-medium flex items-center justify-center hover:brightness-110 active:brightness-90 transition-colors">
+                        AC
+                    </button>
+                    <button id="btn-backspace" class="aspect-square rounded-full bg-[#A6A6A6] text-[#1C1C1E] text-xl font-medium flex items-center justify-center hover:brightness-110 active:brightness-90 transition-colors">
+                        <span class="material-symbols-outlined text-[24px]">backspace</span>
+                    </button>
+                    <button id="btn-percent" class="aspect-square rounded-full bg-[#A6A6A6] text-[#1C1C1E] text-xl font-medium flex items-center justify-center hover:brightness-110 active:brightness-90 transition-colors">
+                        <span class="material-symbols-outlined">percent</span>
+                    </button>
+                    <button id="btn-divide" class="aspect-square rounded-full bg-operation text-white text-2xl font-medium flex items-center justify-center hover:brightness-110 active:brightness-90 transition-all">
+                        <span class="text-[32px]">÷</span>
+                    </button>
+                    
+                    <!-- linha 2: números 7-9 e multiplicação -->
+                    <button id="btn-7" class="aspect-square rounded-full bg-[#333333] text-white text-2xl font-medium flex items-center justify-center hover:bg-[#444] active:bg-[#555] transition-colors">
+                        7
+                    </button>
+                    <button id="btn-8" class="aspect-square rounded-full bg-[#333333] text-white text-2xl font-medium flex items-center justify-center hover:bg-[#444] active:bg-[#555] transition-colors">
+                        8
+                    </button>
+                    <button id="btn-9" class="aspect-square rounded-full bg-[#333333] text-white text-2xl font-medium flex items-center justify-center hover:bg-[#444] active:bg-[#555] transition-colors">
+                        9
+                    </button>
+                    <button id="btn-multiply" class="aspect-square rounded-full bg-operation text-white text-2xl font-medium flex items-center justify-center hover:brightness-110 active:brightness-90 transition-all">
+                        <span class="material-symbols-outlined text-[28px]">close</span>
+                    </button>
+                    
+                    <!-- linha 3: números 4-6 e subtração -->
+                    <button id="btn-4" class="aspect-square rounded-full bg-[#333333] text-white text-2xl font-medium flex items-center justify-center hover:bg-[#444] active:bg-[#555] transition-colors">
+                        4
+                    </button>
+                    <button id="btn-5" class="aspect-square rounded-full bg-[#333333] text-white text-2xl font-medium flex items-center justify-center hover:bg-[#444] active:bg-[#555] transition-colors">
+                        5
+                    </button>
+                    <button id="btn-6" class="aspect-square rounded-full bg-[#333333] text-white text-2xl font-medium flex items-center justify-center hover:bg-[#444] active:bg-[#555] transition-colors">
+                        6
+                    </button>
+                    <button id="btn-subtract" class="aspect-square rounded-full bg-operation text-white text-2xl font-medium flex items-center justify-center hover:brightness-110 active:brightness-90 transition-all">
+                        <span class="material-symbols-outlined text-[28px]">remove</span>
+                    </button>
+                    
+                    <!-- linha 4: números 1-3 e adição -->
+                    <button id="btn-1" class="aspect-square rounded-full bg-[#333333] text-white text-2xl font-medium flex items-center justify-center hover:bg-[#444] active:bg-[#555] transition-colors">
+                        1
+                    </button>
+                    <button id="btn-2" class="aspect-square rounded-full bg-[#333333] text-white text-2xl font-medium flex items-center justify-center hover:bg-[#444] active:bg-[#555] transition-colors">
+                        2
+                    </button>
+                    <button id="btn-3" class="aspect-square rounded-full bg-[#333333] text-white text-2xl font-medium flex items-center justify-center hover:bg-[#444] active:bg-[#555] transition-colors">
+                        3
+                    </button>
+                    <button id="btn-add" class="aspect-square rounded-full bg-operation text-white text-2xl font-medium flex items-center justify-center hover:brightness-110 active:brightness-90 transition-all">
+                        <span class="material-symbols-outlined text-[28px]">add</span>
+                    </button>
+                    
+                    <!-- linha 5: zero, vírgula e igual -->
+                    <button id="btn-0" class="col-span-2 rounded-full bg-[#333333] text-white text-2xl font-medium flex items-center pl-8 hover:bg-[#444] active:bg-[#555] transition-colors">
+                        0
+                    </button>
+                    <button id="btn-comma" class="aspect-square rounded-full bg-[#333333] text-white text-2xl font-medium flex items-center justify-center hover:bg-[#444] active:bg-[#555] transition-colors">
+                        ,
+                    </button>
+                    <button id="btn-equals" class="aspect-square rounded-full bg-operation text-white text-2xl font-medium flex items-center justify-center hover:brightness-110 active:brightness-90 transition-all shadow-[0_0_15px_rgba(240,163,58,0.4)]">
+                        <span class="material-symbols-outlined text-[28px]">equal</span>
+                    </button>
+                    
+                </div>
+                
+            </div>
+            
+            <!-- barra inferior (iphone) -->
+            <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-[134px] h-[5px] bg-white rounded-full opacity-30 pointer-events-none z-30"></div>
+            
+        </div>
+        
+        <!-- gradiente decorativo -->
+        <div class="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-white/5 to-transparent pointer-events-none rounded-r-[2.2rem]"></div>
+        
+    </div>
+    
+    <!-- scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/decimal.js@10.4.3/decimal.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

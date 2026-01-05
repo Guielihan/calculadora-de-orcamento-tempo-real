@@ -1,0 +1,18 @@
+# arquivos do sistema
+.DS_Store
+Thumbs.db
+*.log
+
+# arquivos de editor
+.vscode/
+.cursor/
+.codex/
+.convex/
+
+# arquivos temporários
+*.tmp
+~$*
+
+# node modules (se houver)
+node_modules/
+package-lock.json
