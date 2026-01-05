@@ -18,7 +18,7 @@ Este projeto foi desenvolvido como parte de um **desafio proposto na plataforma 
 
 <div align="center">
 
-![Preview da Calculadora](./assets/preview.png)
+![Preview da Calculadora](./assets/calculator-preview.png)
 
 </div>
 
